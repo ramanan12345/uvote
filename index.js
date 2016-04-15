@@ -2,7 +2,6 @@
 
 const Hapi = require('hapi')
 const Hoek = require('hoek')
-const Vision = require('vision')
 const Bell = require('bell')
 const Handlebars = require('handlebars')
 
@@ -15,7 +14,6 @@ pg.defaults.ssl = true
 
 const server = new Hapi.Server()
 
-const routes = require('./routes')
 const plugins = require('./plugins')
 
 server.connection({
@@ -37,7 +35,13 @@ server.register(plugins, (err) => {
     layoutPath: './views/layouts',
   })
 
-  server.route(routes)
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, reply) => {
+      return reply.view('login')
+    }
+  })
 
   server.start(err => {
     if(err) {

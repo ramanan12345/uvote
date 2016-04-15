@@ -1,9 +1,14 @@
 const loginFields = require('./loginFields')
-const Vision = require('vision')
-const JWT = require('hapi-auth-jwt2')
-
 const registerHandler = require('../handlers/register')
 const loginHandler = require('../handlers/login')
+
+const JWT = {
+  register: require('hapi-auth-jwt2')
+}
+
+const Vision = {
+  register: require('vision')
+}
 
 const Register = {
   register: require('hapi-register'),
