@@ -1,31 +1,31 @@
 {
-  "name": "uvote",
+  "name": "voting",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "bell": "^7.5.0",
+    "boom": "^3.1.2",
+    "handlebars": "^4.0.5",
+    "hapi": "^13.3.0",
+    "hapi-auth-cookie": "^6.1.1",
+    "inert": "^3.2.0",
+    "vision": "^4.1.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon -e js,html index.js"
+    "watch": "nodemon -e html,js index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/traducer/uvote.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^0.8.5",
-    "bell": "^7.4.0",
-    "handlebars": "^4.0.5",
-    "hapi": "^13.3.0",
-    "hapi-auth-cookie": "^6.1.1",
-    "hapi-auth-jwt2": "^5.8.0",
-    "hapi-login": "^1.0.14",
-    "hapi-postgres-connection": "^2.1.1",
-    "hapi-register": "^1.0.14",
-    "hoek": "^3.0.4",
-    "inert": "^3.2.0",
-    "joi": "^8.0.5",
-    "q": "^1.4.1",
-    "request": "^2.70.0",
-    "validator": "^5.2.0",
-    "vision": "^4.1.0"
-  }
+  "bugs": {
+    "url": "https://github.com/traducer/uvote/issues"
+  },
+  "homepage": "https://github.com/traducer/uvote#readme"
 }

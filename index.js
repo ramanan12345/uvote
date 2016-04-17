@@ -1,54 +1,59 @@
-"use strict"
-
 const Hapi = require('hapi')
-const Hoek = require('hoek')
-const Bell = require('bell')
 const Handlebars = require('handlebars')
 
-const KEY = process.env.TWITTER_KEY
-const SECRET = process.env.TWITTER_SECRET
-const PORT = process.env.PORT || 9966
-const pg = require('pg')
-
-pg.defaults.ssl = true
-
 const server = new Hapi.Server()
+const PORT = process.env.PORT || 9966
 
 const plugins = require('./plugins')
 
-server.connection({
-  port: PORT
-})
+server.connection({ port: PORT})
 
-server.register(plugins, (err) => {
+server.register(plugins, err => {
   if(err) {
-    Hoek.assert(!err, err)
+    throw err
   }
 
   server.views({
     engines: {
       html: Handlebars
     },
-    layout: true,
     relativeTo: __dirname,
     path: './views',
     layoutPath: './views/layouts',
+    partialsPath: './views/partials',
+    layout: true
   })
+
+  /* static files */
 
   server.route({
     method: 'GET',
-    path: '/',
-    handler: (request, reply) => {
-      return reply.view('login')
+    path: '/assets/{param*}',
+    handler: {
+      directory: {
+        path: 'assets'
+      }
     }
   })
+
+  server.route({
+    method: 'GET', 
+    path: '/',
+    handler: (request, reply) => {
+      return reply.view('index')
+    }
+  })
+
 
   server.start(err => {
     if(err) {
-      console.error(err)
+      throw err
     }
 
-    console.log('Server listening on at:', server.info.uri)
+    console.log('Server running at:', server.info.uri)
   })
 })
+
+
+
 
