@@ -1,0 +1,41 @@
+{{> nav }}
+
+<section class="create-poll">
+  <div class="jumbotron">
+    <form action="/poll/create" method="post">
+      <h3 class="text-center">Create a Poll!</h3>
+      <div class="form-group">
+        <label for="title">Poll Title</label>
+        <input type="text" name="title" id="title" placeholder="Place Title here" class="form-control title">
+      </div>
+      <div class="options">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" name="option" placeholder="Place option here" class="form-control option">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default option-remove">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" name="option" placeholder="Place option here" class="form-control option">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default option-remove">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group btn-group-lg">
+        <button class="btn btn-default add" type="button">Add Option</button>
+        <button class="btn btn-default submit" type="submit">Submit Poll</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+

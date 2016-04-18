@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aguid": "^1.0.4",
     "bell": "^7.5.0",
     "boom": "^3.1.2",
     "handlebars": "^4.0.5",
     "hapi": "^13.3.0",
     "hapi-auth-cookie": "^6.1.1",
+    "hapi-auth-jwt": "^4.0.0",
     "inert": "^3.2.0",
+    "jsonwebtoken": "^5.7.0",
     "vision": "^4.1.0"
   },
   "devDependencies": {},

@@ -6,4 +6,12 @@ const Inert = {
   register: require('inert')
 }
 
-module.exports = [].concat(Vision, Inert)
+const HapiAuthCookie = {
+  register: require('hapi-auth-cookie')
+}
+
+const Bell = {
+  register: require('bell')
+}
+
+module.exports = [].concat(Vision, Inert, HapiAuthCookie, Bell)
