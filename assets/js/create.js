@@ -1,5 +1,7 @@
 var addButton = document.querySelector('.add')
 var options = document.querySelector('.options')
+var form = document.querySelector('.jumbotron > form')
+var optionsError = document.querySelector('.options-error')
 var removeButtons = document.querySelectorAll('.option-remove')
 
 var removeElement = function removeElement(el) {
@@ -18,6 +20,15 @@ var findParent = function findParent(el) {
     el = el.parentNode
   }
   return current
+}
+
+var checkOptions = function checkOptions(e) {
+  if(options.children.length < 2) {
+    e.preventDefault()
+
+    optionsError.innerHTML = 'Must have at least 2 option fields'
+    return false
+  }
 }
 
 var addOption = function(e) {
@@ -70,3 +81,4 @@ Array.prototype.forEach.call(removeButtons, function(button) {
 })
 
 addButton.addEventListener('click', addOption)
+form.addEventListener('submit', checkOptions)

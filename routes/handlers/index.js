@@ -1,15 +1,37 @@
 'use strict'
 
-exports.create = (request, reply) => {
+const validator = require('validator')
+const helpers = require('../../helpers')
+
+exports.create = (request, reply, soure, error) => {
+  const defaultFields = {
+    title: '',
+    option: ['','']
+  }
+
+  console.log(request.payload)
+
   if(request.route.method === 'get') {
     return reply.view('create', {
-      isAuthenticated: true
+      isAuthenticated: true,
+      fields: defaultFields
     }, {
       layout: 'createLayout'
     })
   }
 
-  console.log(request.payload)
+  if(error && error.isBoom && error.data.isJoi) {
+    let fields = helpers.validateFields(request.payload)
+
+    return reply.view('create', {
+      isAuthenticated: true,
+      fields: fields,
+      createError: helpers.extractJoiErrors(error)
+    }, {
+      layout: 'createLayout'
+    }).code(400)
+  }
+
 }
 
 exports.home = (request, reply) => {

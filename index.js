@@ -6,8 +6,7 @@ const guid = require('aguid')
 
 const server = new Hapi.Server()
 const PORT = process.env.PORT || 9966
-const cookiePW = guid()
-
+const cookiePW = process.env.COOKIE_PW || guid()
 
 const plugins = require('./plugins')
 const routes = require('./routes')

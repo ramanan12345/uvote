@@ -1,3 +1,7 @@
 .create-poll {
   padding: 2em;
 }
+
+.submit-error, .options-error {
+  color: red;
+}

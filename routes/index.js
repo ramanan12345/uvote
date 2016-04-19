@@ -1,6 +1,7 @@
 'use strict'
 
 const handlers = require('./handlers')
+const createSchema = require('../validation/create')
 const routes = []
 
 module.exports = routes.concat(
@@ -15,7 +16,20 @@ module.exports = routes.concat(
 },
 
 {
-  method: ['GET', 'POST'],
+  method: 'POST',
+  path: '/poll/create',
+  config: {
+    auth: 'session',
+    validate: {
+      payload: createSchema,
+      failAction: handlers.create
+    }
+  },
+  handler: handlers.create
+},
+
+{
+  method: 'GET',
   path: '/poll/create',
   config: {
     auth: 'session',

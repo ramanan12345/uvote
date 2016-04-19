@@ -1,6 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var addButton = document.querySelector('.add')
 var options = document.querySelector('.options')
+var form = document.querySelector('.jumbotron > form')
+var optionsError = document.querySelector('.options-error')
 var removeButtons = document.querySelectorAll('.option-remove')
 
 var removeElement = function removeElement(el) {
@@ -19,6 +21,15 @@ var findParent = function findParent(el) {
     el = el.parentNode
   }
   return current
+}
+
+var checkOptions = function checkOptions(e) {
+  if(options.children.length < 2) {
+    e.preventDefault()
+
+    optionsError.innerHTML = 'Must have at least 2 option fields'
+    return false
+  }
 }
 
 var addOption = function(e) {
@@ -71,5 +82,6 @@ Array.prototype.forEach.call(removeButtons, function(button) {
 })
 
 addButton.addEventListener('click', addOption)
+form.addEventListener('submit', checkOptions)
 
 },{}]},{},[1]);
