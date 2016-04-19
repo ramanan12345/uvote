@@ -4,14 +4,12 @@ const validator = require('validator')
 const helpers = require('../../helpers')
 
 exports.create = (request, reply, soure, error) => {
-  const defaultFields = {
-    title: '',
-    option: ['','']
-  }
-
-  console.log(request.payload)
-
   if(request.route.method === 'get') {
+    const defaultFields = {
+      title: '',
+      option: ['','']
+    }
+
     return reply.view('create', {
       isAuthenticated: true,
       fields: defaultFields
@@ -20,9 +18,9 @@ exports.create = (request, reply, soure, error) => {
     })
   }
 
-  if(error && error.isBoom && error.data.isJoi) {
-    let fields = helpers.validateFields(request.payload)
+  const fields = helpers.validateFields(request.payload)
 
+  if(error && error.isBoom && error.data.isJoi) {
     return reply.view('create', {
       isAuthenticated: true,
       fields: fields,
