@@ -2,14 +2,18 @@
 
 const Hapi = require('hapi')
 const Handlebars = require('handlebars')
+const pg = require('pg')
 const guid = require('aguid')
 
 const server = new Hapi.Server()
 const PORT = process.env.PORT || 9966
 const cookiePW = process.env.COOKIE_PW || guid()
 
+pg.defaults.ssl = true
+
 const plugins = require('./plugins')
 const routes = require('./routes')
+
 
 server.connection({ port: PORT})
 
