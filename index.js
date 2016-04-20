@@ -22,7 +22,7 @@ server.register(plugins, err => {
     throw err
   }
 
-  server.auth.strategy('session', 'cookie', {
+  server.auth.strategy('session', 'cookie', 'try', {
     cookie: 'session',
     ttl: 1000 * 60 * 60,
     password: cookiePW,

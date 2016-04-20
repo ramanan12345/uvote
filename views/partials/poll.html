@@ -1,0 +1,10 @@
+<form>
+  <h3 class="text-center header">{{poll.title}}</h3>
+  <div class="form-group">
+    <select name="option" class="form-control">
+      {{#each poll.options}}
+        <option>{{this.value}}</option>
+      {{/each}}
+    </select>
+  </div>
+</form>

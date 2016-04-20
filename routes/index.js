@@ -19,7 +19,9 @@ module.exports = routes.concat(
   method: 'POST',
   path: '/poll/create',
   config: {
-    auth: 'session',
+    auth: {
+      mode: 'required'
+    },
     validate: {
       payload: createSchema,
       failAction: handlers.create
@@ -31,21 +33,35 @@ module.exports = routes.concat(
 {
   method: 'GET',
   path: '/poll/create',
+  handler: handlers.create,
   config: {
-    auth: 'session',
-  },
-  handler: handlers.create
+    auth: {
+      mode: 'required'
+    }
+  }
+},
+
+{
+  method: 'GET',
+  path: '/polls/edit',
+  handler: handlers.editPolls
+},
+
+{
+  method: 'GET',
+  path: '/polls/{user}',
+  handler: handlers.userPolls
+},
+
+{
+  method: 'GET',
+  path: '/poll/{id}',
+  handler: handlers.userPoll
 },
 
 {
   method: 'GET',
   path: '/',
-  config: {
-    auth: {
-      strategy: 'session',
-      mode: 'try'
-    }
-  },
   handler: handlers.home
 },
 
@@ -61,5 +77,10 @@ module.exports = routes.concat(
 {
   method: 'GET',
   path: '/logout',
-  handler: handlers.logout
+  handler: handlers.logout,
+  config: {
+    auth: {
+      mode: 'required'
+    }
+  }
 })

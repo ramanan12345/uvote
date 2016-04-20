@@ -1,25 +1,7 @@
-'use strict'
-
-const validator = require('validator')
-const helpers = require('../../helpers')
-
 exports.create = require('./createPoll')
-
-exports.home = (request, reply) => {
-  if(request.auth.isAuthenticated) {
-    return reply.view('index', {
-      isAuthenticated: true
-    })
-  }
-
-  return reply.view('index', {
-    isAuthenticated: false
-  })
-}
-
+exports.home  = require('./home')
 exports.twitter = require('./twitter')
-
-exports.logout = (request, reply) => {
-  request.cookieAuth.clear()
-  return reply.redirect('/')
-}
+exports.userPolls = require('./userPolls')
+exports.logout = require('./logout')
+exports.editPolls = require('./editPolls')
+exports.userPoll = require('./userPoll')

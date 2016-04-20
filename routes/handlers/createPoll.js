@@ -44,6 +44,8 @@ const createOptions = (client, options, id) => {
 }
 
 module.exports = (request, reply, soure, error) => {
+  const user = request.auth.credentials
+
   if(request.route.method === 'get') {
     const defaultFields = {
       title: '',
@@ -51,8 +53,8 @@ module.exports = (request, reply, soure, error) => {
     }
 
     return reply.view('create', {
-      isAuthenticated: true,
-      fields: defaultFields
+      fields: defaultFields,
+      user: user
     }, {
       layout: 'createLayout'
     })
@@ -60,12 +62,11 @@ module.exports = (request, reply, soure, error) => {
 
   const fields = helpers.validateFields(request.payload)
   const client = request.pg.client
-  const user = request.auth.credentials
 
   if(error && error.isBoom && error.data.isJoi) {
     return reply.view('create', {
-      isAuthenticated: true,
       fields: fields,
+      user: user,
       createError: helpers.extractJoiErrors(error)
     }, {
       layout: 'createLayout'
