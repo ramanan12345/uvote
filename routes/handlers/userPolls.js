@@ -1,34 +1,33 @@
 'use strict'
 
-const getPolls = require('../../helpers').getPolls
-
 module.exports = (request, reply) => {
-    const user = request.auth.credentials || { username: request.params.user }
-    const client = request.pg.client
-    const queryString = 'SELECT poll_id, title FROM poll INNER JOIN people ON (people.username = $1) AND (people.id = poll.user_id)'
+  const getPolls = (client, queryString, option) => {
+    const query = client.query(queryString, option, (err, result) => {
+      if(err) {
+        throw err
+      }
 
-    getPolls(client, queryString, [request.params.user])
-    .then(rows => {
-      return reply.view('userPolls', {
-        isAuthenticated: request.auth.isAuthenticated,
-        user: user,
-        polls: rows
-      })
-    })
-    .fail(err => {
-      console.error(err)
-
-      if(err.empty) {
+      if(!result.rowCount) {
         return reply.view('userPolls', {
           isAuthenticated: request.auth.isAuthenticated,
-          user: user,
+          user: request.auth.credentials,
+          username: username,
           empty: true
         }).code(400)
+      } else {
+        return reply.view('userPolls', {
+          isAuthenticated: request.auth.isAuthenticated,
+          user: request.auth.credentials,
+          username: username,
+          polls: result.rows
+        })
       }
     })
+  }
+
+  const client = request.pg.client
+  const username = request.params.user
+  const queryString = 'SELECT username, poll.id, title FROM poll JOIN people ON people.username = $1 AND people.id = poll.user_id'
+
+  getPolls(client, queryString, [username])
 }
-
-
-
-
-

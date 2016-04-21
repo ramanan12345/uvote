@@ -54,7 +54,7 @@ module.exports = routes.concat(
 },
 
 {
-  method: 'GET',
+  method: ['GET','POST'],
   path: '/poll/{id}',
   handler: handlers.userPoll
 },

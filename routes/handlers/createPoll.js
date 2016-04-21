@@ -6,15 +6,14 @@ const helpers = require('../../helpers')
 
 const createPoll = (client, title, user) => {
   const deferred = Q.defer()
-  const query = 'INSERT INTO poll (title, user_id) VALUES($1, $2) returning poll_id'
+  const query = 'INSERT INTO poll (title, user_id) VALUES($1, $2) returning poll.id'
 
   client.query(query, [title, user.id], (err, result) => {
     if(err) {
-      console.error(err, 'createPoll')
       deferred.reject(err)
     }
 
-    deferred.resolve(result.rows[0]['poll_id'])
+    deferred.resolve(result.rows[0]['id'])
   })
 
   return deferred.promise
@@ -27,7 +26,6 @@ const queryOption = (client, option, id) => {
 
   client.query(query, [option, id], (err, result) => {
     if(err) {
-      console.error(err, 'queryOption')
       deffered.reject(err)
     }
 
@@ -79,6 +77,10 @@ module.exports = (request, reply, soure, error) => {
   })
   .then(() => {
     return reply.redirect('/')
+  })
+  .fail(err => {
+    console.log('path :', request.route.path)
+    console.error(err)
   })
 }
 

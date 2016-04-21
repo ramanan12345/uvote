@@ -1,4 +1,4 @@
-<form>
+<form action="/poll/{{poll.id}}" method="POST">
   <h3 class="text-center header">{{poll.title}}</h3>
   <div class="form-group">
     <select name="option" class="form-control">
@@ -7,4 +7,5 @@
       {{/each}}
     </select>
   </div>
+  <button type="submit" class="btn btn-primary btn-lg btn-block">Vote</button>
 </form>

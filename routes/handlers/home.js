@@ -1,17 +1,22 @@
 'use strict'
 
-const getPolls = require('../../helpers').getPolls
-
 module.exports = (request, reply) => {
-  const client = request.pg.client
-  const queryString = 'SELECT poll_id, title FROM poll'
-
-  getPolls(client, queryString)
-  .then(rows => {
-    return reply.view('index', {
-      isAuthenticated: request.auth.isAuthenticated,
-      user: request.auth.credentials,
-      polls: rows
+  const getPolls = () => {
+    const client = request.pg.client
+    const queryString = 'select id, title from poll'
+    const query = client.query(queryString, (err, result) => {
+      if(err) {
+        throw err
+      }
+      return reply.view('index', {
+        isAuthenticated: request.auth.isAuthenticated,
+        user: request.auth.credentials,
+        polls: result.rows
+      })
     })
-  })
+  }
+
+  getPolls()
 }
+
+
