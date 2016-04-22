@@ -42,15 +42,26 @@ module.exports = routes.concat(
 },
 
 {
-  method: 'GET',
+  method: ['GET', 'POST'],
   path: '/polls/edit',
-  handler: handlers.editPolls
+  handler: handlers.editPolls,
+  config: {
+    auth: {
+      mode: 'required'
+    }
+  }
 },
 
 {
   method: 'GET',
   path: '/polls/{user}',
   handler: handlers.userPolls
+},
+
+{
+  method: 'GET',
+  path: '/api/poll/{id}',
+  handler: handlers.fetchPoll
 },
 
 {

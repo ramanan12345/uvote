@@ -1,7 +1,7 @@
 <section class="create-poll">
   <div class="jumbotron">
-    <form action="/poll/create" method="post">
-      <h3 class="text-center">Create a Poll!</h3>
+    <form action="/poll/edit/{{fields.id}}" method="post">
+      <h3 class="text-center">Edit your poll!</h3>
       <p class="options-error text-center"></p>
       {{#each createError}}
         <p class="submit-error text-center">{{this}}</p>
@@ -11,7 +11,7 @@
         <input type="text" name="title" id="title" placeholder="Place Title here" class="form-control title" value="{{fields.title}}" pattern="^[a-zA-Z0-9\s\.',?!]*$">
       </div>
       <div class="options">
-        {{#each fields.option}}
+        {{#each fields.options}}
           {{> option value=this}}
         {{/each}}
       </div>

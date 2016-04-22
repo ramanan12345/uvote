@@ -1,3 +1,5 @@
+'use strict'
+
 const post = require('./vote')
 
 const reducePoll = (title, id, rows) => {
@@ -20,12 +22,21 @@ module.exports = (request, reply) => {
           throw err
         }
 
+        if(!result.rowCount) {
+          return reply({
+            statusCode: '404',
+            error: 'No Polls match that ID'
+          }).code(404)
+        }
+
         const poll = reducePoll(result.rows[0]['title'], result.rows[0]['id'], result.rows)
 
         return reply.view('userPoll', {
           isAuthenticated: request.auth.isAuthenticated,
           user: request.auth.credentials,
           poll: poll
+        }, {
+          layout: 'pollChartLayout'
         })
       })
     }
