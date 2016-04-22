@@ -31,6 +31,21 @@ module.exports = routes.concat(
 },
 
 {
+  method: 'POST',
+  path: '/polls/edit/{id}',
+  config: {
+    auth: {
+      mode: 'required'
+    }, 
+    validate: {
+      payload: createSchema,
+      failAction: handlers.edit
+    }
+  },
+  handler: handlers.edit
+},
+
+{
   method: 'GET',
   path: '/poll/create',
   handler: handlers.create,

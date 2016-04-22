@@ -41,7 +41,7 @@ const createOptions = (client, options, id) => {
   })
 }
 
-module.exports = (request, reply, soure, error) => {
+module.exports = (request, reply, source, error) => {
   const user = request.auth.credentials
 
   if(request.route.method === 'get') {
