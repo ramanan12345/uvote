@@ -45,7 +45,8 @@ var addOption = function(e) {
     'class': 'form-control option',
     'placeholder': 'Place option here',
     'name': 'option',
-    'type': 'text'
+    'type': 'text',
+    'pattern': "^[a-zA-Z0-9\\s\\.,'!?]*$"
   }
 
   var buttonAttributes = {

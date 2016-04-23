@@ -1,7 +1,6 @@
 'use strict'
 
 const Q = require('q')
-const validator = require('validator')
 const helpers = require('../../helpers')
 
 const createPoll = (client, title, user) => {

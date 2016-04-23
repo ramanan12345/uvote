@@ -1,12 +1,13 @@
 'use strict'
 
-const validator = require('validator')
+const xss = require('xss')
 
 exports.extractJoiErrors = (error) => {
   return error.data.details.reduce((a, b) => {
     let message = b.message
 
     if(b.path.indexOf('option.') > -1) {
+      console.log(b)
       message = 'Options are not allowed to be empty'
     }
 
@@ -18,10 +19,10 @@ exports.validateFields = (fields) => {
   return Object.keys(fields).reduce((a, key) => {
     if(Array.isArray(fields[key])) {
        a[key] = fields[key].map(field => {
-        return validator.escape(field)
+        return xss(field)
        })
     } else {
-      a[key] = validator.escape(fields[key])
+      a[key] = xss(fields[key])
     }
 
     return a
