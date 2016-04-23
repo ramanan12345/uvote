@@ -7,8 +7,6 @@ const canvas = document.querySelector('#poll-chart')
 const pollId = canvas.dataset.pollId
 const ctx = canvas.getContext('2d')
 
-Chart.defaults.global.responsive = false
-
 const createChart = (poll) => {
   const colors = randomColor({ count: poll.options.length })
   const data = poll.options.reduce((dataSet, option, i) => {
