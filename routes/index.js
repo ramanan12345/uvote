@@ -1,7 +1,7 @@
 'use strict'
 
 const handlers = require('./handlers')
-const createSchema = require('../validation/create')
+const validation = require('../validation')
 const routes = []
 
 module.exports = routes.concat(
@@ -23,7 +23,7 @@ module.exports = routes.concat(
       mode: 'required'
     },
     validate: {
-      payload: createSchema,
+      payload: validation.create,
       failAction: handlers.create
     }
   },
@@ -38,7 +38,8 @@ module.exports = routes.concat(
       mode: 'required'
     }, 
     validate: {
-      payload: createSchema,
+      params: validation.id,
+      payload: validation.create,
       failAction: handlers.edit
     }
   },
@@ -61,6 +62,9 @@ module.exports = routes.concat(
   path: '/polls/edit',
   handler: handlers.editPolls,
   config: {
+    validate: {
+      params: validation['poll-id']
+    },
     auth: {
       mode: 'required'
     }
@@ -70,18 +74,33 @@ module.exports = routes.concat(
 {
   method: 'GET',
   path: '/polls/{user}',
+  config: {
+    validate: {
+      params: validation.user
+    }
+  },
   handler: handlers.userPolls
 },
 
 {
   method: 'GET',
   path: '/api/poll/{id}',
+  config: {
+    validate: {
+      params: validation.id
+    }
+  },
   handler: handlers.fetchPoll
 },
 
 {
   method: ['GET','POST'],
   path: '/poll/{id}',
+  config: {
+    validate: {
+      params: validation.id
+    }
+  },
   handler: handlers.userPoll
 },
 
