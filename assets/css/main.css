@@ -15,7 +15,7 @@
   position: relative;
 }
 
-form:first-child {
+.delete-poll {
   position: absolute;
   top: 0;
   right: 0;
