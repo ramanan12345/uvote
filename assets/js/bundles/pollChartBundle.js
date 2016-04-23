@@ -1,33 +1,33 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('es6-promise').polyfill()
 
-const fetch = require('isomorphic-fetch')
-const randomColor = require('randomcolor')
-const Chart = require('chart.js')
-const canvas = document.querySelector('#poll-chart')
-const pollId = canvas.dataset.pollId
-const ctx = canvas.getContext('2d')
+var fetch = require('isomorphic-fetch')
+var randomColor = require('randomcolor')
+var Chart = require('chart.js')
+var canvas = document.querySelector('#poll-chart')
+var pollId = canvas.dataset.pollId
+var ctx = canvas.getContext('2d')
 
-const createChart = (poll) => {
-  const colors = randomColor({ count: poll.options.length })
-  const data = poll.options.reduce((dataSet, option, i) => {
+var createChart = function(poll) {
+  var colors = randomColor({ count: poll.options.length })
+  var data = poll.options.reduce(function(dataSet, option, i) {
     dataSet.labels = dataSet.labels.concat(option.value)
     dataSet.datasets[0].data = dataSet.datasets[0].data.concat(option.rating)
     dataSet.datasets[0].backgroundColor = dataSet.datasets[0].backgroundColor.concat(colors[i])
     return dataSet
   }, { labels: [], datasets: [{ data: [], backgroundColor: [] }]})
 
-  const chart = new Chart(ctx, {
+  var chart = new Chart(ctx, {
     type: 'pie',
     data: data
   })
 }
 
 fetch('/api/poll/' + pollId)
-.then(response => {
+.then(function(response) {
   return response.json()
 })
-.then(json => {
+.then(function(json) {
   createChart(json.poll)
 })
 
