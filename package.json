@@ -22,8 +22,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "npm run watch-js & npm run watch",
-    "watch": "nodemon -e html,js index.js",
+    "start": "node index.js",
+    "watch": "npm run watch-js & nodemon -e html,js index.js",
     "watch-js": "watchify assets/js/pollChart.js -o assets/js/bundles/pollChartBundle.js -v"
   },
   "repository": {
