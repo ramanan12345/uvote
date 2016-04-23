@@ -121,6 +121,20 @@ module.exports = routes.concat(
 
 {
   method: 'GET',
+  path: '/polls/delete/{id}',
+  config: {
+    auth: {
+      mode: 'required'
+    },
+    validate: {
+      params: validation.id
+    }
+  },
+  handler: handlers.remove
+},
+
+{
+  method: 'GET',
   path: '/logout',
   handler: handlers.logout,
   config: {

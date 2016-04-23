@@ -3,6 +3,7 @@ var options = document.querySelector('.options')
 var form = document.querySelector('.jumbotron > form')
 var optionsError = document.querySelector('.options-error')
 var removeButtons = document.querySelectorAll('.option-remove')
+var deleteButton = document.querySelector('.delete')
 
 var removeElement = function removeElement(el) {
   return function(e) {

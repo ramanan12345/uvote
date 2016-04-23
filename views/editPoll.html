@@ -1,10 +1,15 @@
 <section class="create-poll">
   <div class="jumbotron">
+    <form action="/polls/delete/{{fields.id}}" method="get">
+      <button class="btn btn-danger delete" type="submit">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </form>
     <form action="/polls/edit/{{fields.id}}" method="post">
       <h3 class="text-center">Edit your poll!</h3>
       <p class="options-error text-center"></p>
       {{#each createError}}
-        <p class="submit-error text-center">{{this}}</p>
+      <p class="submit-error text-center">{{this}}</p>
       {{/each}}
       <div class="form-group">
         <label for="title">Poll Title</label>
@@ -12,15 +17,14 @@
       </div>
       <div class="options">
         {{#each fields.options}}
-          {{> option value=this}}
+        {{> option value=this}}
         {{/each}}
       </div>
       <div class="btn-group btn-group-lg">
         <button class="btn btn-default add" type="button">Add Option</button>
-        <button class="btn btn-default submit" type="submit">Submit Poll</button>
+        <button class="btn btn-default submit" type="submit">Edit Poll</button>
       </div>
     </form>
   </div>
 </section>
-
 

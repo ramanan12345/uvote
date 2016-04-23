@@ -11,6 +11,17 @@
   padding: 2em;
 }
 
+.jumbotron {
+  position: relative;
+}
+
+form:first-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+}
+
 .submit-error, .options-error {
   color: red;
 }

@@ -19,6 +19,7 @@ const deletePoll = (request, reply) => {
 }
 
 module.exports = (request, reply, source, error) => {
+  console.log(request.payload)
   const client = request.pg.client
   const user = request.auth.credentials
   const fields = helpers.validateFields(request.payload)
